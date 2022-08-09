@@ -3,6 +3,8 @@ package com.twa.catalog.controller;
 import com.twa.catalog.controller.resources.CountryResource;
 import com.twa.catalog.dto.CountryDTO;
 import com.twa.catalog.service.CountryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/country")
 public class CountryController implements CountryResource {
 
+    private static Logger logger = LoggerFactory.getLogger(CountryController.class);
     private CountryService countryService;
 
     @Autowired
@@ -24,6 +27,8 @@ public class CountryController implements CountryResource {
     }
 
     public ResponseEntity<CountryDTO> get(@PathVariable Long id) {
+        logger.info("Obtain information of the country with id: {}", id);
+
         CountryDTO response = countryService.get(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -37,7 +42,7 @@ public class CountryController implements CountryResource {
         CountryDTO response = countryService.update(id, country);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    
+
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         countryService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);

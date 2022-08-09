@@ -7,6 +7,8 @@ import com.twa.catalog.exception.DuplicateResourceException;
 import com.twa.catalog.exception.ResourceNotException;
 import com.twa.catalog.repository.CountryRepository;
 import ma.glasnost.orika.MapperFacade;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import java.util.Optional;
 @Service
 public class CountryService {
 
+    private static Logger logger = LoggerFactory.getLogger(CountryService.class);
     private CountryRepository countryRepository;
     private MapperFacade mapperFacade;
 
@@ -28,6 +31,7 @@ public class CountryService {
         Optional<Country> country = countryRepository.findById(id);
 
         if (country.isEmpty()) {
+            logger.debug("Not exist country with id: {}", id);
             throw new ResourceNotException(ApiError.COUNTRY_NOT_FOUND);
         }
         return mapperFacade.map(country.get(), CountryDTO.class);
@@ -49,6 +53,7 @@ public class CountryService {
         Optional<Country> existCountry = countryRepository.findById(id);
 
         if (existCountry.isEmpty()) {
+            logger.info("Obtain information of the country with id: {}", id);
             throw new ResourceNotException(ApiError.COUNTRY_NOT_FOUND);
         }
 
