@@ -1,0 +1,12 @@
+version: '3.0'
+
+services:
+  catalog-api-db:
+    container_name: catalog-api-db
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'flights_catalog'
+      MYSQL_ROOT_PASSWORD: ''
+    ports:
+      - '3306:3310'
