@@ -1,6 +1,15 @@
 version: '3.0'
 
 services:
+  catalog-api:
+    container_name: catalog-api
+    image: ghcr.io/progmise/catalog-api:1.0.0
+    restart: always
+    links:
+      - catalog-api-db
+    ports:
+      - '8080:8080'
+
   catalog-api-db:
     container_name: catalog-api-db
     image: mysql:8.0
