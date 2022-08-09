@@ -21,6 +21,8 @@ server:
     context-path: /api/catalog
 
 spring:
+  application:
+    name: catalog-api
   datasource:
     url: "jdbc:mysql://localhost:3306/flights_catalog?autoReconnect=true"
     username: root
