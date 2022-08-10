@@ -16,6 +16,6 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: 'flights_catalog'
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
     ports:
       - '3306:3310'
