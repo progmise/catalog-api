@@ -3,7 +3,7 @@ version: '3.0'
 services:
   catalog-api:
     container_name: catalog-api
-    image: ghcr.io/progmise/catalog-api:1.0.0
+    image: ghcr.io/progmise/catalog-api:main
     restart: always
     links:
       - catalog-api-db
@@ -16,6 +16,6 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: 'flights_catalog'
-      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
     ports:
       - '3306:3310'
